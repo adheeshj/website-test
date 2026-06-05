@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/navbar'
 import { Hero } from '@/components/hero'
 import { About } from '@/components/about'
+import { Products } from '@/components/products'
 import { Footer } from '@/components/footer'
 
 export default function Page() {
@@ -10,21 +11,7 @@ export default function Page() {
       <main>
         <Hero />
         <About />
-        {/* Products section placeholder */}
-        <section id="products" className="py-32 sm:py-40">
-          <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 text-center">
-            <span className="text-gold font-medium text-sm uppercase tracking-widest">
-              Our Collection
-            </span>
-            <h2 className="mt-6 font-serif text-4xl sm:text-5xl font-semibold text-foreground">
-              Featured Products
-            </h2>
-            <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Coming soon – browse our curated selection of guitars, strings,
-              and accessories.
-            </p>
-          </div>
-        </section>
+        <Products />
         {/* Gallery section placeholder */}
         <section id="gallery" className="py-32 sm:py-40 bg-card">
           <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 text-center">
