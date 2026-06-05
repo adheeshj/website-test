@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { X, Send, Loader2 } from 'lucide-react'
+import { X, Send, Loader as Loader2 } from 'lucide-react'
 import type { Product } from '@/data/products'
 
 type FormState = {
