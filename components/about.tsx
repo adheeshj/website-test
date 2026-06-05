@@ -1,4 +1,7 @@
+'use client'
+
 import { Guitar, Heart, Award } from 'lucide-react'
+import { useInView } from '@/hooks/use-in-view'
 
 const features = [
   {
@@ -22,9 +25,16 @@ const features = [
 ]
 
 export function About() {
+  const { ref, isVisible } = useInView()
+
   return (
     <section id="about" className="py-32 sm:py-40 bg-card">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div
+        ref={ref}
+        className={`mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-gold font-medium text-sm uppercase tracking-widest">
@@ -67,7 +77,7 @@ export function About() {
             { value: '25+', label: 'Years of Experience' },
             { value: '600+', label: 'Happy Customers' },
             { value: '500+', label: 'Products Available' },
-            { value: '4.8★', label: 'Google Rating' },
+            { value: '4.8\u2605', label: 'Google Rating' },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <div className="font-serif text-4xl font-semibold text-gold">

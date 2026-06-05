@@ -2,8 +2,11 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
+import { ArrowRight } from 'lucide-react'
 import { products, type Product } from '@/data/products'
 import { EnquiryModal } from '@/components/enquiry-modal'
+import { useInView } from '@/hooks/use-in-view'
 
 function formatPrice(price: number) {
   return new Intl.NumberFormat('en-IN', {
@@ -24,7 +27,6 @@ function ProductCard({
 
   return (
     <div className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-gold/50 hover:shadow-lg hover:shadow-gold/5">
-      {/* Image */}
       <div className="relative aspect-[4/3] overflow-hidden bg-muted">
         {!imgError ? (
           <Image
@@ -40,13 +42,10 @@ function ProductCard({
             No image
           </div>
         )}
-        {/* Category tag */}
         <span className="absolute top-3 left-3 rounded-full bg-background/80 backdrop-blur-sm px-3 py-1 text-xs font-medium text-gold border border-gold/20">
           {product.category}
         </span>
       </div>
-
-      {/* Info */}
       <div className="flex flex-1 flex-col p-5">
         <h3 className="font-serif text-lg font-semibold text-foreground">
           {product.name}
@@ -69,10 +68,16 @@ function ProductCard({
 
 export function Products() {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const { ref, isVisible } = useInView()
 
   return (
     <section id="products" className="py-32 sm:py-40">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8 lg:px-12">
+      <div
+        ref={ref}
+        className={`mx-auto max-w-7xl px-6 sm:px-8 lg:px-12 transition-all duration-700 ${
+          isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'
+        }`}
+      >
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto">
           <span className="text-gold font-medium text-sm uppercase tracking-widest">
@@ -96,6 +101,17 @@ export function Products() {
               onEnquire={setSelectedProduct}
             />
           ))}
+        </div>
+
+        {/* Link to full catalog */}
+        <div className="mt-12 text-center">
+          <Link
+            href="/products"
+            className="inline-flex items-center gap-2 rounded-full border border-gold/30 px-8 py-3 text-sm font-medium text-foreground transition-all duration-300 hover:bg-gold hover:text-background hover:border-gold"
+          >
+            View Full Catalog
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </div>
 
